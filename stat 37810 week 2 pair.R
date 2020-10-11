@@ -3,6 +3,7 @@ bulls_and_cows <- function(){
     computer_choice <- sample(0:9,4)
     return(computer_choice)
   }
+<<<<<<< HEAD
   validation <- function(user_choice){
     remaining <- 3
     while (remaining>0){
@@ -19,16 +20,21 @@ bulls_and_cows <- function(){
       
     }
   }
+=======
+>>>>>>> 1d8e1d846b6c0a93555f28a53480bbcbdbaa9471
   get_guess <- function(remaining){
     print(paste("Number of remaining guesses:",remaining))
     numbers_string <- readline("Please enter four numbers > ")#input user's guess 
     user_choice<-as.integer(unlist(strsplit(numbers_string, ""))) # as numeric vector
+<<<<<<< HEAD
     validation(user_choice)
     if (validate_choice==user_choice){
       return(user_choice)
     }else{
       stop("the user inputs are not correct.")
     }
+=======
+>>>>>>> 1d8e1d846b6c0a93555f28a53480bbcbdbaa9471
     return(user_choice)
   }
   number_bulls_and_cows <- function(computer_choice,user_choice){
@@ -83,4 +89,8 @@ bulls_and_cows <- function(){
     }
   }
   
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1d8e1d846b6c0a93555f28a53480bbcbdbaa9471
