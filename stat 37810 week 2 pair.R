@@ -3,39 +3,24 @@ bulls_and_cows <- function(){
     computer_choice <- sample(0:9,4)
     return(computer_choice)
   }
-<<<<<<< HEAD
-  validation <- function(user_choice){
-    remaining <- 3
-    while (remaining>0){
-      remaining <- remaining-1
-      if (length(user_choice)!=4){
-        warning("The length of user inputs are not correct")
-        break
-      }
-      if(any(duplicated(user_choice))){
-        warning("There are duplicated numbers in user inputs")
-        break
-      }
-      
-      
-    }
-  }
-=======
->>>>>>> 1d8e1d846b6c0a93555f28a53480bbcbdbaa9471
   get_guess <- function(remaining){
     print(paste("Number of remaining guesses:",remaining))
-    numbers_string <- readline("Please enter four numbers > ")#input user's guess 
-    user_choice<-as.integer(unlist(strsplit(numbers_string, ""))) # as numeric vector
-<<<<<<< HEAD
-    validation(user_choice)
-    if (validate_choice==user_choice){
+    chance <- 3
+    while(chance>0){
+      chance <- chance-1
+      numbers_string <- readline("Please enter four numbers > ")#input user's guess 
+      user_choice<-as.integer(unlist(strsplit(numbers_string, ""))) # as numeric vector
+      if (length(user_choice)!=4){
+        message("The length of user inputs are not correct")
+        next
+      }
+      if(any(duplicated(user_choice))){
+        message("There are duplicated numbers in user inputs")
+        next
+      }
       return(user_choice)
-    }else{
-      stop("the user inputs are not correct.")
     }
-=======
->>>>>>> 1d8e1d846b6c0a93555f28a53480bbcbdbaa9471
-    return(user_choice)
+    
   }
   number_bulls_and_cows <- function(computer_choice,user_choice){
     nbulls <- function(computer_choice,user_choice){
@@ -89,8 +74,6 @@ bulls_and_cows <- function(){
     }
   }
   
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1d8e1d846b6c0a93555f28a53480bbcbdbaa9471
+
+
