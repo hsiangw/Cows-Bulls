@@ -1,12 +1,13 @@
+#Hsiang Wang and Tianheng Huang
+
 bulls_and_cows <- function(){
   generate_computer_vector <- function(){
     #This function generates computer choice
     computer_choice <- sample(0:9,4)
     return(computer_choice)
   }
-  get_guess <- function(remaining){
+  get_guess <- function(){
     #This function inputs number of remaining choice and outputs user choice
-    print(paste("Number of remaining guesses:",remaining))
     chance <- 3 #Allowing three errors
     while(chance>0){
       chance <- chance-1
@@ -22,7 +23,7 @@ bulls_and_cows <- function(){
       }
       return(user_choice)
     }
-    
+    stop("no more attempts allowed")
   }
   number_bulls_and_cows <- function(computer_choice,user_choice){
     #This function inputs computer and user choice. It outputs number of bulls and cows
@@ -42,7 +43,8 @@ bulls_and_cows <- function(){
     ncow <- ncows(computer_choice,user_choice)
     return(c(nbull,ncow))
   }
-  do_response <- function(computer_choice){ #return the correct value
+  do_response <- function(nbnc,computer_choice,numberofguesses,type){ 
+    #return different response(correct, no_remaining, remaining)
     vectoint <- function(vec){
       value=0
       for (i in 1:length(vec)){
@@ -50,29 +52,37 @@ bulls_and_cows <- function(){
       }
       value
     }
-    print(paste("The correct answer is:",vectoint(computer_choice)))
+    if(type=="no_remaining"){
+      print(paste(nbnc[1],"A",nbnc[2],"B"))
+      print(paste("The correct answer is:",vectoint(computer_choice)))
+    }
+    if(type=="correct"){
+      print("Correct!")
+      print(paste("You guess",numberofguesses,"time(s)"))
+    }
+    if(type=="remaining"){
+      print(paste(nbnc[1],"A",nbnc[2],"B"))
+      print(paste("Number of remaining guess(es):",10-numberofguesses))
+    }
   }
   computer_choice <- generate_computer_vector() # generate computer's pick
   numberofguesses <- 0 #initialize number of guesses
   user_choice <- rep(0,4) #initialize user's guess
   while(numberofguesses<10){ # while number of guesses less than 10
-    user_choice <- get_guess(10-numberofguesses)
+    user_choice <- get_guess()
     numberofguesses=numberofguesses+1 # increment number of guesses
     nbnc <- number_bulls_and_cows(computer_choice,user_choice)
     if(nbnc[1]==4){ # if the guess is correct
-      print("Correct!")
-      print(paste("You guess",numberofguesses,"time(s)"))
+      do_response(nbnc,computer_choice,numberofguesses,"correct")
       break
     } 
     else{ # if the guess is wrong
       remaining <- 10-numberofguesses
       if (remaining==0){
-        print(paste(nbnc[1],"A",nbnc[2],"B"))
-        print(paste("Number of remaining guess(es):",remaining))
-        do_response(computer_choice)
+        do_response(nbnc,computer_choice,numberofguesses,"no_remaining")
       }
       else{
-        print(paste(nbnc[1],"A",nbnc[2],"B"))
+        do_response(nbnc,computer_choice,numberofguesses,"remaining")
       }
     }
   }
